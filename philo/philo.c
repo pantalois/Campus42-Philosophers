@@ -1,11 +1,11 @@
 #include "philo.h"
 
-void	ft_free_data(t_philo *philo)
+/*void	ft_free_data(t_philo *philo)
 {
 	if (t_philo)
 	{}
 
-}
+}*/
 int	main(int argc, char *argv[])
 {
 	t_philo *philo;
@@ -15,7 +15,7 @@ int	main(int argc, char *argv[])
 	//Control de número de argv válidos.
 	if (argc != 5 && argc != 6)
 	{
-		printf("The arguments need to be 5 200 200 200 [5]");
+		printf("The arguments need to be [number_of_philos]  [time_to_die] [time_to_eat] [time_to_sleep] [number_of_meals]");
 		return (1);
 	}
 	/*
@@ -77,4 +77,3 @@ int	main(int argc, char *argv[])
 	//while (argv[1] != 1)
 	return (0);
 }
-
