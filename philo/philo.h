@@ -44,8 +44,11 @@ typedef struct s_table_data
 }	t_data_table;
 
 
-int	ft_atoi(const char *str);
-int	parse_input(char *argv[]);
+int		ft_atoi(const char *str);
+int		parse_input(char *argv[]);
 void	atoi_argv(t_philo *philo, char *argv[]);
+void	ft_free_data(t_philo *philo);
+t_philo	*ft_init_data();
+int		ft_check_atoi(char *argv[], t_philo *philo);
 
 #endif

@@ -14,9 +14,9 @@ int	parse_input(char *argv[])
 			printf("No negative values admited\n");
 			return (1);
 		}
-		if ((argv[i][j] == '+' && argv[i][j + 1] == '0') || argv[i][j] == '0')
+		if (argv[i][j] == '+' && argv[i][j + 1] == '0')
 		{
-			printf("+0... and 0123... Is not a valid format\n");
+			printf("+0...Is not a valid format\n");
 			return (1);
 		}
 		while (argv[i][j] >= '0' && argv[i][j] <= '9')
