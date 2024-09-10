@@ -3,6 +3,8 @@ NAME = philo
 SRC = philo.c \
       philo_utils.c \
       parsing.c \
+	  data_init.c \
+	  threads.c
 
 OBJ = $(SRC:.c=.o)
 

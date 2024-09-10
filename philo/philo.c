@@ -1,71 +1,54 @@
 #include "philo.h"
 
-int	ft_check_atoi(char*argv[], t_philo *philo)
+int	ft_check_atoi(t_data_table *table)
 {
-	int i;
-
-	i = 0;
-	while (argv[i])
+	if ((table->number_of_philos == 0) ||
+			(table->time_to_die == 0) ||
+			(table->time_to_eat == 0) ||
+			(table->time_to_sleep) == 0)
 	{
-		atoi_argv(philo, argv);
-		i++;
-	}
-	if ((philo->data_table->number_of_philos == 0) ||
-			(philo->data_table->time_to_die == 0) ||
-			(philo->data_table->time_to_eat == 0) ||
-			(philo->data_table->time_to_sleep) == 0)
-	{
-		ft_free_data(philo);
+		ft_free_data(table);
 		printf("All the values must be at least 1");
 		return (1);
 	}
+	//Cantrolar aqui si me dan times to eat 0?
 	return (0);
 }
 
-t_philo	*ft_init_data()
+void	ft_free_data(t_data_table *table)
 {
-	t_data_table *table;
-
-	table = (t_data_table *)malloc(sizeof(t_data_table));
-	if (!table)
-		return (NULL);
-	memset(table, 0, sizeof(t_data_table));
-	//Pensar como inializar los datos del philo
-
-	//Darle la vuelta
-	philo->data_table = (t_data_table *)malloc(sizeof(t_data_table));
-	if (!philo->data_table)
+	if (table->philos)
 	{
-		ft_free_data(philo);
-		return (NULL);
+		free(table->philos);
+		free(table->number_of_philos);
 	}
-	memset(philo->data_table, 0, sizeof(t_data_table));
-	return (philo);
-}
-
-void	ft_free_data(t_philo *philo)
-{
-	if (philo->data_table)
-		free(philo->data_table);
-	free(philo);
+	free(table);
 }
 
 int	main(int argc, char *argv[])
 {
-	t_philo	*philo;
+	t_data_table	*table;
+	pthread_t		thread;
 
 	if (argc != 5 && argc != 6)
 	{
-		printf("The arguments need to be [number_of_philos]  [time_to_die] [time_to_eat] [time_to_sleep] [number_of_meals]");
+		printf("The arguments need to be [number_of_philos]"
+				"[time_to_die] [time_to_eat] [time_to_sleep]"
+				"[number_of_meals]");
 		return (1);
 	}
 	if (parse_input(argv) == 1)
 		return (1);
-	philo = ft_init_data();
-	if (!philo)
+	table = ft_init_data();//Inicializo las estructuras a 0, para evitarme problemas
+	ft_struct_data(argv, table);
+	if (!table)
 		return (1);
-	if (ft_check_atoi(argv, philo) == 1)
+	if (ft_check_atoi(table) == 1)
 		return (1);	
-
+	pthread_create(&thread, NULL, ft_eat, NULL);
+	my_func();
+	pthread_join(thread, NULL);
+	
+	ft_free_data(table);
 	return (0);
 }

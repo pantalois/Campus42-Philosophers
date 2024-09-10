@@ -32,7 +32,7 @@ typedef struct s_philo
 
 typedef struct s_table_data
 {
-	int	number_of_philos;
+	int*	number_of_philos;
 	int	time_to_die;
 	int	time_to_eat;
 	int	time_to_sleep;
@@ -44,11 +44,12 @@ typedef struct s_table_data
 }	t_data_table;
 
 
-int		ft_atoi(const char *str);
-int		parse_input(char *argv[]);
-void	atoi_argv(t_philo *philo, char *argv[]);
-void	ft_free_data(t_philo *philo);
-t_philo	*ft_init_data();
-int		ft_check_atoi(char *argv[], t_philo *philo);
-
+int				ft_atoi(const char *str);
+int				parse_input(char *argv[]);
+void			ft_free_data(t_data_table *table);
+t_data_table	*ft_init_data();
+int				ft_check_atoi(t_data_table *table);
+void			ft_struct_data(char *argv[], t_data_table *table);
+void			*ft_eat(void *arg);
+void			my_func();
 #endif
