@@ -12,8 +12,20 @@
 
 #include "philo.h"
 
+void	grab_forks(t_data_table *table)
+{
+	printf("hola\n");
+	pthread_mutex_init (&table->philos->right_fork->fork, NULL);
+	//pthread_mutex_init (&table->philos->left_fork->fork, NULL);
+
+	printf("adios\n");
+	
+}
+
 void	*ft_eat(void* arg)
 {
+
+	//Para comer tienen que cojer los tenedores
 	(void)arg;
 	for (int i = 0; i < 10; i++)
 	{

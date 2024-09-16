@@ -43,11 +43,17 @@ int	main(int argc, char *argv[])
 	ft_struct_data(argv, table);
 	if (!table)
 		return (1);
-	if (ft_check_atoi(table) == 1)
-		return (1);	
+	if (ft_check_atoi(table) == 1)//Revisar el MAX_INT
+		return (1);
+	//Proceso de mutex e hilos en un while i < ft_atoi[1]?
+	//asignar_forks
+	grab_forks(table);
 	pthread_create(&thread, NULL, ft_eat, NULL);
 	my_func();
 	pthread_join(thread, NULL);
+	printf("%i\n", table->number_of_philos[1]);
+
+	//Asignar tenedores y hacer mutex.
 	
 	ft_free_data(table);
 	return (0);

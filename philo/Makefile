@@ -8,7 +8,7 @@ SRC = philo.c \
 
 OBJ = $(SRC:.c=.o)
 
-CFLAGS = -Wall -Wextra -Werror #-pthread
+CFLAGS = -Wall -Wextra -Werror -pthread
 
 CC = cc
 

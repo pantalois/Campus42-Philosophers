@@ -52,4 +52,6 @@ int				ft_check_atoi(t_data_table *table);
 void			ft_struct_data(char *argv[], t_data_table *table);
 void			*ft_eat(void *arg);
 void			my_func();
+void			grab_forks(t_data_table *table);
+
 #endif

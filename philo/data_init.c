@@ -38,17 +38,21 @@ void	ft_struct_data(char *argv[], t_data_table *table)
 	//Para el numero de philos hare un array de ints
 	int	i;
 
-	i = 0;
+	i = 1;
 	table->number_of_philos = malloc(sizeof(int *) * ft_atoi(argv[1]));
 	if (!table->number_of_philos)
 	{
 		ft_free_data(table);
 		return ;
 	}
-	while (++i <= ft_atoi(argv[1]))
-		table->number_of_philos[i] = i;
+	printf("atoi = %i\n", ft_atoi(argv[1]));
+	while (i <= ft_atoi(argv[1]))
+	{
+		table->number_of_philos[i - 1] = i;
+		i++;
+	}
 	int a = 0;
-	while (a <= ft_atoi(argv[1]))
+	while (a < ft_atoi(argv[1]))
 	{	printf("posicion %i de number of philos = %i\n", a, table->number_of_philos[a]);
 		a++;
 	}	
