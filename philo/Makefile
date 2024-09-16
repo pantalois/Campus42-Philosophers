@@ -4,7 +4,8 @@ SRC = philo.c \
       philo_utils.c \
       parsing.c \
 	  data_init.c \
-	  threads.c
+	  threads.c \
+	  print_array.c
 
 OBJ = $(SRC:.c=.o)
 

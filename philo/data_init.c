@@ -6,7 +6,7 @@
 /*   By: loigonza <loigonza@42.barcel>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 12:39:56 by loigonza          #+#    #+#             */
-/*   Updated: 2024/09/10 16:14:39 by loigonza         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:03:29 by loigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,7 @@ void	ft_struct_data(char *argv[], t_data_table *table)
 		table->number_of_philos[i - 1] = i;
 		i++;
 	}
-	int a = 0;
-	while (a < ft_atoi(argv[1]))
-	{	printf("posicion %i de number of philos = %i\n", a, table->number_of_philos[a]);
-		a++;
-	}	
+
 	table->time_to_die = ft_atoi(argv[2]) * 1e3;
 	table->time_to_eat = ft_atoi(argv[3]) * 1e3;
 	table->time_to_sleep = ft_atoi(argv[4]) * 1e3;

@@ -15,7 +15,7 @@ typedef struct s_table_data	t_data_table;
 
 typedef struct s_fork
 {
-	t_mtx	fork;
+	t_mtx	fork_mtx;
 	int	fork_id;
 }	t_fork;
 
@@ -53,5 +53,6 @@ void			ft_struct_data(char *argv[], t_data_table *table);
 void			*ft_eat(void *arg);
 void			my_func();
 void			grab_forks(t_data_table *table);
+void			print_array(t_data_table *table, char *argv[]);
 
 #endif

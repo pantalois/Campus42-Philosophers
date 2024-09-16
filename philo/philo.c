@@ -27,6 +27,11 @@ void	ft_free_data(t_data_table *table)
 
 int	main(int argc, char *argv[])
 {
+	//Ultimo dia 16/09
+	//Tareas a hacer:
+	//1. Asignar a cada pos del array una posicion en el index de la estructura philo
+	//2. Asegurarme de que el parseo es efectivo, para ello checkeamos si en el 
+	//proceso de inicializacion de la estructura se puede comprobar mas cosas
 	t_data_table	*table;
 	pthread_t		thread;
 
@@ -47,8 +52,9 @@ int	main(int argc, char *argv[])
 		return (1);
 	//Proceso de mutex e hilos en un while i < ft_atoi[1]?
 	//asignar_forks
+	print_array(table, argv);
 	grab_forks(table);
-	pthread_create(&thread, NULL, ft_eat, NULL);
+	pthread_create(&thread, NULL, ft_eat, &table->philos);
 	my_func();
 	pthread_join(thread, NULL);
 	printf("%i\n", table->number_of_philos[1]);

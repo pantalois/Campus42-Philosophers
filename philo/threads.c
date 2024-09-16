@@ -6,7 +6,7 @@
 /*   By: loigonza <loigonza@42.barcel>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 17:19:46 by loigonza          #+#    #+#             */
-/*   Updated: 2024/09/10 18:28:25 by loigonza         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:44:43 by loigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,29 @@
 void	grab_forks(t_data_table *table)
 {
 	printf("hola\n");
-	pthread_mutex_init (&table->philos->right_fork->fork, NULL);
-	//pthread_mutex_init (&table->philos->left_fork->fork, NULL);
-
+	pthread_mutex_init (&table->philos->right_fork->fork_mtx, NULL);
+	pthread_mutex_init (&table->philos->left_fork->fork_mtx, NULL);
 	printf("adios\n");
 	
 }
 
 void	*ft_eat(void* arg)
 {
+	t_philo*	philos;
+
+	philos = (t_philo *)arg;
+	
+
+	pthread_mutex_lock(&philos->right_fork->fork_mtx);
+
+	//Codigo aqui.
+
+	pthread_mutex_unlock(&philos->left_fork->fork_mtx);
+	
 
 	//Para comer tienen que cojer los tenedores
 	(void)arg;
-	for (int i = 0; i < 10; i++)
-	{
-		sleep(1);
-		printf("hola edmumdo %i\n", i);
-	}
+
 	return (NULL);
 }
 
