@@ -32,6 +32,18 @@ int	main(int argc, char *argv[])
 	//1. Asignar a cada pos del array una posicion en el index de la estructura philo
 	//2. Asegurarme de que el parseo es efectivo, para ello checkeamos si en el 
 	//proceso de inicializacion de la estructura se puede comprobar mas cosas
+	//
+	//
+	//if (ft_atoi(argv[i]) % 2 == 0))
+	//		TENEMOS UN NUMERO PAR DE PHILOS
+	//		EL philo[0, 2, 4, 6] haran mutex a los tenedores la primera ronda,
+	//		es decir, if(philo[i++] % 2 == 0)
+	//
+	//if (ft_atoi(argv[0]) % 2 != 0)
+	//		TENEMOS UN NUMERO IMPAR DE PHILOS
+	//		el philo[1, 2,"3"] haran mutex a los tenedores la primera ronda,
+	//		es decir, if(philo[i++] % 2 != 0)
+	//
 	t_data_table	*table;
 	pthread_t		thread;
 
