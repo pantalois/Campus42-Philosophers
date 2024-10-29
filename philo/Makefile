@@ -1,37 +1,35 @@
 NAME = philo
 
-SRC = philo.c \
-      philo_utils.c \
-      parsing.c \
-	  data_init.c \
-	  threads.c \
-	  print_array.c
+SRCS = philo.c \
+	   philo_utils.c \
+	   philo_routine.c \
+	   monitoring.c \
+	   init_data.c
 
-OBJ = $(SRC:.c=.o)
+OBJS = $(SRCS:.c=.o)
 
-CFLAGS = -Wall -Wextra -Werror -pthread
+CFLAGS = -Wall -Wextra -Werror #-g -fsanitize=thread
 
-CC = cc
+CC = gcc
 
-RM = -rm -f
+RM = rm -f
 
-INCLUDE = philo.h Makefile
-
-%.o: %.c $(INCLUDE)
-	$(CC) $(CFLAGS) -c $< -o $@
+INCLUDE = Makefile philo.h 
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	$(CC) $(CFLAS) $(OBJ) -o $(NAME)
+$(NAME): $(OBJS)
+		$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -lpthread
+
+%.o: %.c $(INCLUDE)
+		$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(RM) $(OBJ)
+		$(RM) $(OBJS)
 
 fclean: clean
-	$(RM) $(NAME)
+		$(RM) $(NAME)
 
 re: fclean all
 
-
-.PHONY: re all clean fclean
+.PHONY: all clean fclean re

@@ -1,58 +1,79 @@
-#ifndef PHILO_H 
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: loigonza <loigonza@42.barcel>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/21 11:41:27 by loigonza          #+#    #+#             */
+/*   Updated: 2024/10/29 17:07:00 by loigonza         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef PHILO_H
 # define PHILO_H
+# include <pthread.h>  //Para hilos y mutex			   
+# include <stdio.h>    // Para printf
+# include <stdlib.h>   // Para malloc y free
+# include <unistd.h>   // Para usleep
+# include <sys/time.h> // Para gettimeofday
 
-# include <string.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <sys/time.h>
-# include <pthread.h>
-# include <limits.h>
+// Estructura para almacenar datos de cada filósofo
 
-typedef pthread_mutex_t t_mtx;
-typedef struct s_philo		t_philo;
-typedef struct s_table_data	t_data_table;
-
-typedef struct s_fork
+typedef struct s_philosopher
 {
-	t_mtx	fork_mtx;
-	int	fork_id;
-}	t_fork;
-
-typedef struct s_philo
+	int					id;
+	int					times_eaten;
+	pthread_t			thread;
+	pthread_mutex_t		*left_fork;
+	pthread_mutex_t		*right_fork;
+	long long			last_meal_time;
+	struct s_data		*data;
+}				t_philosopher;
+// Estructura para datos generales
+typedef struct s_data
 {
-	int		index;
-	t_fork		*right_fork;
-	t_fork		*left_fork;
-	int		last_meal_time; //tiempo desde la última comida.
-	int		full;
-	t_data_table	*data_table;
-	pthread_t	thread_id;
-}	t_philo;
+	int					num_philosophers;
+	long long			time_to_die;
+	long long			time_to_eat;
+	long long			time_to_sleep;
+	int					must_eat_count;
+	int					all_alive;
+	pthread_mutex_t		*forks;
+	pthread_mutex_t		print_lock;
+	long long			start_time;
+	t_philosopher		*philosophers;
+	pthread_mutex_t		eat_count_lock;
+	pthread_mutex_t		died;
+	pthread_mutex_t		stop;
+	pthread_mutex_t		meal_time_lock;
+	pthread_t			monitoring;
+	int					total_eaten;
+}				t_data;
 
-typedef struct s_table_data
-{
-	int*	number_of_philos;
-	int	time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	number_of_meals;
-	int	start_simulation;
-	int	end_simulation; //Cuando sea 1 será que un filo muere or all full
-	t_fork	*forks;
-	t_philo	*philos;
-}	t_data_table;
-
-
-int				ft_atoi(const char *str);
-int				parse_input(char *argv[]);
-void			ft_free_data(t_data_table *table);
-t_data_table	*ft_init_data();
-int				ft_check_atoi(t_data_table *table);
-void			ft_struct_data(char *argv[], t_data_table *table);
-void			*ft_eat(void *arg);
-void			my_func();
-void			grab_forks(t_data_table *table);
-void			print_array(t_data_table *table, char *argv[]);
+int			init_data(t_data *data, int argc, char **argv);
+int			start_simulation(t_data *data);
+long long	current_time(void);
+void		usleep_ms(int ms);
+void		cleanup(t_data *data);
+int			validate_args(int argc, char **argv);
+int			ft_atoi(const char *str);
+void		*philosopher_routine(void *arg);
+void		syncro(t_philosopher *philo);
+void		one_philo_actions(t_philosopher *philo);
+void		philos_actions(t_philosopher	*philo);
+void		print_action(t_philosopher *philo, const char *action);
+int			init_forks(t_data *data);
+int			init_philosophers(t_data *data);
+int			join_threads(t_data *data);
+void		*monitor_philosophers(void *data_void);
+int			create_threads(t_data *data);
+int			check_eat_count(t_data *data);
+int			is_death(t_data *data, int flag);
+void		take_forks(t_philosopher *philo);
+void		release_forks(t_philosopher *philo);
+void		check_eaten_times(t_data *data);
+void		print_error(void);
+int			init_data_mutex(t_data *data);
 
 #endif
